@@ -1,0 +1,410 @@
+create table address
+(
+    lastname  varchar(25),
+    firstname varchar(25),
+    street    varchar(50),
+    city      varchar(25),
+    state     char(2),
+    zip       double precision,
+    phone     varchar(12),
+    ext       varchar(5)
+);
+
+alter table address
+    owner to postgres;
+
+create table areas
+(
+    radius integer,
+    area   numeric(14, 2)
+);
+
+alter table areas
+    owner to postgres;
+
+create table author
+(
+    authorname varchar(50) not null
+        constraint author_pkey
+            primary key,
+    comments   varchar(100)
+);
+
+alter table author
+    owner to postgres;
+
+create table birthday
+(
+    firstname varchar(15) not null,
+    lastname  varchar(15) not null,
+    birthdate date,
+    age       double precision,
+    constraint pk_birthday
+        primary key (firstname, lastname)
+);
+
+alter table birthday
+    owner to postgres;
+
+create table book_order
+(
+    title        varchar(100) not null
+        constraint book_order_pkey
+            primary key,
+    publisher    varchar(20),
+    categoryname varchar(20)
+);
+
+alter table book_order
+    owner to postgres;
+
+create table book_review_context
+(
+    title       varchar(100) not null
+        constraint book_review_context_pkey
+            primary key,
+    reviewer    varchar(25),
+    review_date timestamp(0),
+    review_text varchar(4000)
+);
+
+alter table book_review_context
+    owner to postgres;
+
+create table book_review_ctxcat
+(
+    title       varchar(100) not null
+        constraint book_review_ctxcat_pkey
+            primary key,
+    reviewer    varchar(25),
+    review_date timestamp(0),
+    review_text varchar(4000)
+);
+
+alter table book_review_ctxcat
+    owner to postgres;
+
+create table bookshelf_audit
+(
+    title        varchar(100),
+    publisher    varchar(20),
+    categoryname varchar(20),
+    old_rating   varchar(2),
+    new_rating   varchar(2),
+    audit_date   timestamp(0)
+);
+
+alter table bookshelf_audit
+    owner to postgres;
+
+create table category
+(
+    categoryname   varchar(12) not null
+        constraint category_pkey
+            primary key,
+    parentcategory varchar(8),
+    subcategory    varchar(20)
+);
+
+alter table category
+    owner to postgres;
+
+create table bookshelf
+(
+    title        varchar(100) not null
+        constraint bookshelf_pkey
+            primary key,
+    publisher    varchar(20),
+    categoryname varchar(20)
+        constraint catfk
+            references category,
+    rating       varchar(2)
+);
+
+alter table bookshelf
+    owner to postgres;
+
+create table bookshelf_author
+(
+    title      varchar(100)
+        constraint titlefk
+            references bookshelf,
+    authorname varchar(50)
+        constraint authornamefk
+            references author
+);
+
+alter table bookshelf_author
+    owner to postgres;
+
+create table bookshelf_checkout
+(
+    name         varchar(25),
+    title        varchar(100),
+    checkoutdate timestamp(0),
+    returneddate timestamp(0)
+);
+
+alter table bookshelf_checkout
+    owner to postgres;
+
+create table borrower
+(
+    name  varchar(25) not null
+        constraint borrower_pk
+            primary key,
+    tools tools_va
+);
+
+alter table borrower
+    owner to postgres;
+
+create table breeding
+(
+    offspring varchar(10),
+    sex       char,
+    cow       varchar(10),
+    bull      varchar(10),
+    birthdate timestamp(0)
+);
+
+alter table breeding
+    owner to postgres;
+
+create table cd
+(
+    account      double precision not null,
+    amount       double precision not null,
+    maturitydate timestamp(0)     not null
+);
+
+alter table cd
+    owner to postgres;
+
+create table comfort
+(
+    city          varchar(13)  not null,
+    sampledate    timestamp(0) not null,
+    noon          numeric(3, 1),
+    midnight      numeric(3, 1),
+    precipitation double precision
+);
+
+
+create table comfort2
+(
+    city          varchar(13)  not null,
+    sampledate    timestamp(0) not null,
+    noon          numeric(3, 1),
+    midnight      numeric(3, 1),
+    precipitation double precision
+);
+
+
+create table comfort_test
+(
+    city       varchar(13)  not null,
+    sampledate timestamp(0) not null,
+    measure    varchar(10),
+    value      numeric(3, 1)
+);
+
+
+create table continent
+(
+    continent varchar(30)
+);
+
+
+create table country
+(
+    country   varchar(30) not null,
+    continent varchar(30)
+);
+
+
+create table customer
+(
+    customer_id double precision,
+    person      person_ty
+);
+
+
+
+create table empty
+(
+    nothing varchar(25),
+    less    double precision
+);
+
+
+
+create table holiday
+(
+    holiday        varchar(25),
+    actualdate     timestamp(0),
+    celebrateddate timestamp(0)
+);
+
+
+create table location
+(
+    city       varchar(25),
+    country    varchar(25),
+    continent  varchar(25),
+    latitude   double precision,
+    northsouth char,
+    longitude  double precision,
+    eastwest   char
+);
+
+create table magazine
+(
+    name      varchar(16),
+    title     varchar(37),
+    author    varchar(25),
+    issuedate timestamp(0),
+    page      double precision
+);
+
+create table math
+(
+    name  varchar(12),
+    above double precision,
+    below double precision,
+    empty double precision
+);
+
+
+
+create table name
+(
+    name varchar(25)
+);
+
+
+
+create table newspaper
+(
+    feature varchar(15) not null,
+    section char,
+    page    double precision
+);
+
+
+create table numbertest
+(
+    value1 double precision,
+    value2 double precision,
+    value3 numeric(10, 2)
+);
+
+
+create table payday
+(
+    cycledate timestamp(0)
+);
+
+
+
+create table proposal
+(
+    proposal_id       bigint not null
+        constraint proposal_pkey
+            primary key,
+    recipient_name    varchar(25),
+    proposal_name     varchar(25),
+    short_description varchar(1000),
+    proposal_text     text,
+    budget            bytea,
+    cover_letter      varchar(255)
+);
+
+
+
+create table radius_vals
+(
+    radius integer
+);
+
+
+create table rating
+(
+    rating            varchar(2),
+    ratingdescription varchar(50)
+);
+
+
+create table rose
+(
+    lodging varchar(12)
+);
+
+
+create table shipping
+(
+    client varchar(13),
+    weight double precision
+);
+
+
+create table stock
+(
+    company        varchar(20),
+    symbol         varchar(6),
+    industry       varchar(15),
+    closeyesterday numeric(6, 2),
+    closetoday     numeric(6, 2),
+    volume         double precision
+);
+
+
+
+create table stock_account
+(
+    account         bigint,
+    accountlongname varchar(50)
+);
+
+
+
+create table stock_trx
+(
+    account  bigint,
+    symbol   varchar(20),
+    price    numeric(6, 2),
+    quantity integer,
+    trx_flag varchar(1)
+);
+
+
+
+create table trouble
+(
+    city          varchar(13)  not null,
+    sampledate    timestamp(0) not null,
+    noon          numeric(3, 1),
+    midnight      numeric(3, 1),
+    precipitation double precision
+);
+
+
+
+create table twoname
+(
+    firstname varchar(25),
+    lastname  varchar(25)
+);
+
+
+
+create table weather
+(
+    city        varchar(11),
+    temperature double precision,
+    humidity    double precision,
+    condition   varchar(9)
+);
+
+
+
