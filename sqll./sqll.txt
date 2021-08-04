@@ -1,0 +1,1069 @@
+create type ADDRESS_TY as
+(Street  VARCHAR(50),
+ City    VARCHAR(25),
+ State   CHAR(2),
+ Zip     DOUBLE PRECISION);
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create or replace function Age (BirthDate TIMESTAMP(0)) returns INT as
+$$
+begin
+  RETURN ROUND(CURRENT_TIMESTAMP - BirthDate);
+end;
+$$ language plpgsql;
+end;
+
+create  type ANIMAL_TY as
+(Breed      VARCHAR(25),
+ Name       VARCHAR(25),
+ BirthDate  TIMESTAMP(0)
+-- member function AGE (BirthDate IN DATE) return NUMBER
+);
+
+
+-- create type  ANIMAL_TY as member ;
+
+
+
+--  For the Nested Table examples:
+-- create type ANIMALS_NT as table of ANIMAL_TY;
+
+
+--  Requires that the ADDRESS_TY type already exist.
+
+create type PERSON_TY as
+(Name      VARCHAR(25),
+ Address   ADDRESS_TY);
+
+
+--  Creates a varying array datatype.
+
+create domain TOOLS_VA as VARCHAR(25)[];
+
+
+
+-- drop table ADDRESS;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table ADDRESS (
+LastName   VARCHAR(25),
+FirstName  VARCHAR(25),
+Street     VARCHAR(50),
+City       VARCHAR(25),
+State      CHAR(2),
+Zip        DOUBLE PRECISION,
+Phone      VARCHAR(12),
+Ext        VARCHAR(5)
+);
+
+insert into ADDRESS values ('BAILEY', 'WILLIAM',
+     null,null,null,null,'213-555-0223',null);
+insert into ADDRESS values ('ADAMS', 'JACK',
+     null,null,null,null,'415-555-7530',null);
+insert into ADDRESS values ('SEP', 'FELICIA',
+     null,null,null,null,'214-555-8383',null);
+insert into ADDRESS values ('DE MEDICI', 'LEFTY',
+     null,null,null,null,'312-555-1166',null);
+insert into ADDRESS values ('DEMIURGE', 'FRANK',
+     null,null,null,null,'707-555-8900',null);
+insert into ADDRESS values ('CASEY', 'WILLIS',
+     null,null,null,null,'312-555-1414',null);
+insert into ADDRESS values ('ZACK', 'JACK',
+     null,null,null,null,'415-555-6842',null);
+insert into ADDRESS values ('YARROW', 'MARY',
+     null,null,null,949414302,'415-555-2178',null);
+insert into ADDRESS values ('WERSCHKY', 'ARNY',
+     null,null,null,null,'415-555-7387',null);
+insert into ADDRESS values ('BRANT', 'GLEN',
+     null,null,null,null,'415-555-7512',null);
+insert into ADDRESS values ('EDGAR', 'THEODORE',
+     null,null,null,null,'415-555-6252',null);
+insert into ADDRESS values ('HARDIN', 'HUGGY',
+     null,null,null,null,'617-555-0125',null);
+insert into ADDRESS values ('HILD', 'PHIL',
+     null,null,null,null,'603-555-2242',null);
+insert into ADDRESS values ('LOEBEL', 'FRANK',
+     null,null,null,null,'202-555-1414',null);
+insert into ADDRESS values ('MOORE', 'MARY',
+     null,null,null,601262460,'718-555-1638',null);
+insert into ADDRESS values ('SZEP', 'FELICIA',
+     null,null,null,null,'214-555-8383',null);
+insert into ADDRESS values ('ZIMMERMAN', 'FRED',
+     null,null,null,null,'503-555-7491',null);
+
+-- drop table AREAS;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table AREAS
+(Radius      INT,
+ Area        DECIMAL(14,2)
+);
+
+-- No inserts. This table is empty.
+
+-- drop table AUTHOR;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table AUTHOR
+(AuthorName  VARCHAR(50) primary key,
+Comments  VARCHAR(100));
+
+Insert into AUTHOR values
+('DIETRICH BONHOEFFER', 'GERMAN THEOLOGIAN, KILLED IN A WAR CAMP');
+Insert into AUTHOR values
+('ROBERT BRETALL','KIERKEGAARD ANTHOLOGIST');
+Insert into AUTHOR values
+('ALEXANDRA DAY','AUTHOR OF PICTURE BOOKS FOR CHILDREN');
+Insert into AUTHOR values
+('STEPHEN JAY GOULD','SCIENCE COLUMNIST, HARVARD PROFESSOR');
+Insert into AUTHOR values
+('SOREN KIERKEGAARD','DANISH PHILOSOPHER AND THEOLOGIAN');
+Insert into AUTHOR values
+('HARPER LEE','AMERICAN NOVELIST, PUBLISHED ONLY ONE NOVEL');
+Insert into AUTHOR values
+('LUCY MAUD MONTGOMERY','CANADIAN NOVELIST');
+Insert into AUTHOR values
+('JOHN ALLEN PAULOS','MATHEMATICS PROFESSOR');
+Insert into AUTHOR values
+('J. RODALE', 'ORGANIC GARDENING EXPERT');
+Insert into AUTHOR values
+('DANIEL BOORSTIN', 'LIBRARIAN OF CONGRESS');
+Insert into AUTHOR values
+('CHRIS VAN ALLSBURG', 'ILLUSTRATOR');
+Insert into AUTHOR values
+('MARGARET WISE BROWN', 'EDITOR AND AUTHOR');
+Insert into AUTHOR values
+('CLEMENT HURD', 'ILLUSTRATOR');
+Insert into AUTHOR values
+('G. B. TALBOT', 'FAMOUS LEDGERIST');
+Insert into AUTHOR values
+('JOHN KEATS', 'ROMANTIC POET');
+Insert into AUTHOR values
+('JOHN BARNARD', 'KEATS EDITOR');
+Insert into AUTHOR values
+('CHRISTOPHER NOLAN', 'POET AND AUTHOR');
+Insert into AUTHOR values
+('DAVID MCCULLOUGH', 'HISTORIAN');
+Insert into AUTHOR values
+('MERIWETHER LEWIS', 'EXPLORER AND JOURNALIST');
+Insert into AUTHOR values
+('WILLIAM CLARK', 'EXPLORER AND JOURNALIST');
+Insert into AUTHOR values
+('STEPHEN AMBROSE',NULL);
+Insert into AUTHOR values
+('BERNARD DE VOTO', 'EDITOR');
+Insert into AUTHOR values
+('WILTON BARNHARDT', 'AMERICAN AUTHOR');
+Insert into AUTHOR values
+('AVI', 'PROLIFIC AUTHOR OF BOOKS FOR CHILDREN');
+Insert into AUTHOR values
+('J. K. ROWLING', 'AUTHOR OF HARRY POTTER SERIES');
+Insert into AUTHOR values
+('W. P. KINSELLA', 'AUTHOR AND WRITING PROFESSOR');
+Insert into AUTHOR values
+('E. B. WHITE', 'AUTHOR AND ESSAYIST');
+Insert into AUTHOR values
+('BERYL MARKHAM', 'AVIATOR AND ADVENTURESS');
+Insert into AUTHOR values
+('PETER GOMES', 'HARVARD THEOLOGIAN');
+Insert into AUTHOR values
+('THOMAS SWEARS', 'PASTOR AND AUTHOR');
+Insert into AUTHOR values
+('E. ANNIE PROULX',NULL);
+
+commit;
+
+-- ALTER SESSION SET NLS_DATE_FORMAT='DD.MM.YYYY';
+
+-- drop table BIRTHDAY;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table BIRTHDAY (
+FirstName     VARCHAR(15),
+LastName      VARCHAR(15),
+BirthDate     DATE,
+Age           DOUBLE PRECISION,
+constraint PK_BIRTHDAY primary key (FirstName, LastName)
+);
+
+-- insert into BIRTHDAY values ('GEORGE','SAND','12.05.1976',41);todo  date style boshqa dd.mm.yyyy emas databaseda yyyy-mm-dd
+-- insert into BIRTHDAY values ('ROBERT','JAMES','23.08.1967',50); todo
+-- insert into BIRTHDAY values ('NANCY','LEE','02.02.1977',40); todo
+-- insert into BIRTHDAY values ('VICTORIA','LYNN',TO_DATE('20.05.1979 3:27','DD.MM.YYYY HH24:MI'),38); todo
+-- insert into BIRTHDAY values ('FRANK','PILOT','11.11.1972',45); todo
+
+-- drop table BOOK_ORDER;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table BOOK_ORDER
+(Title       VARCHAR(100) primary key,
+Publisher    VARCHAR(20),
+CategoryName VARCHAR(20));
+
+
+Insert into BOOK_ORDER values
+('SHOELESS JOE','MARINER','ADULTFIC');
+Insert into BOOK_ORDER values
+('GOSPEL','PICADOR','ADULTFIC');
+Insert into BOOK_ORDER values
+('SOMETHING SO STRONG','PANDORAS','ADULTNF');
+Insert into BOOK_ORDER values
+('GALILEO''S DAUGHTER','PENGUIN','ADULTNF');
+Insert into BOOK_ORDER values
+('LONGITUDE','PENGUIN','ADULTNF');
+Insert into BOOK_ORDER values
+('ONCE REMOVED','SANCTUARY PUB','ADULTNF');
+
+commit;
+
+
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table BOOK_REVIEW_CONTEXT
+(Title       VARCHAR(100) primary key,
+Reviewer     VARCHAR(25),
+Review_Date  TIMESTAMP(0),
+Review_Text  VARCHAR(4000));
+
+insert into BOOK_REVIEW_CONTEXT values
+('MY LEDGER', 'EMILY TALBOT', '01.05.02',
+'A fascinating look into the transactions and finances of G. B. Talbot and Dora Talbot as they managed a property in New Hampshire around 1900.  The stories come through the purchases � for medicine, doctor visits and gravesites � for workers during harvests � for gifts at the general store at Christmas.  A great read. ');
+
+
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table BOOK_REVIEW_CTXCAT
+(Title       VARCHAR(100) primary key,
+Reviewer     VARCHAR(25),
+Review_Date  TIMESTAMP(0),
+Review_Text  VARCHAR(4000));
+
+insert into BOOK_REVIEW_CTXCAT values
+('MY LEDGER', 'EMILY TALBOT', '01.05.02',
+'A fascinating look into the transactions and finances of G. B. Talbot and Dora Talbot as they managed a property in New Hampshire around 1900.  The stories come through the purchases � for medicine, doctor visits and gravesites � for workers during harvests � for gifts at the general store at Christmas.  A great read. ');
+
+COMMIT;
+
+-- drop table BOOKSHELF_AUDIT;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table BOOKSHELF_AUDIT
+(Title       VARCHAR(100),
+Publisher    VARCHAR(20),
+CategoryName VARCHAR(20),
+Old_Rating   VARCHAR(2),
+New_Rating   VARCHAR(2),
+Audit_Date   TIMESTAMP(0));
+
+-- drop table CATEGORY;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table CATEGORY
+(CategoryName  VARCHAR(12) primary key,
+ParentCategory  VARCHAR(8),
+SubCategory VARCHAR(20));
+
+Insert into CATEGORY values
+('ADULTREF','ADULT','REFERENCE');
+Insert into CATEGORY values
+('ADULTFIC','ADULT','FICTION');
+Insert into CATEGORY values
+('ADULTNF','ADULT','NONFICTION');
+Insert into CATEGORY values
+('CHILDRENPIC','CHILDREN','PICTURE BOOK');
+Insert into CATEGORY values
+('CHILDRENFIC','CHILDREN','FICTION');
+Insert into CATEGORY values
+('CHILDRENNF','CHILDREN','NONFICTION');
+
+commit;
+
+
+
+--  The CATFK foreign key requires that the CATEGORY table
+--  is created and populated before BOOKSHELF.
+
+-- drop table BOOKSHELF;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table BOOKSHELF
+(Title       VARCHAR(100) primary key,
+Publisher    VARCHAR(20),
+CategoryName VARCHAR(20),
+Rating       VARCHAR(2),
+constraint CATFK foreign key (CategoryName)
+references CATEGORY(CategoryName));
+
+Insert into BOOKSHELF values
+('TO KILL A MOCKINGBIRD','HARPERCOLLINS','ADULTFIC','5');
+Insert into BOOKSHELF values
+ ('WONDERFUL LIFE','W.W.NORTON','ADULTNF','5');
+Insert into BOOKSHELF values
+ ('INNUMERACY','VINTAGE BOOKS','ADULTNF','4');
+Insert into BOOKSHELF values
+ ('KIERKEGAARD ANTHOLOGY','PRINCETON UNIV PR','ADULTREF','3');
+Insert into BOOKSHELF values
+ ('ANNE OF GREEN GABLES','GRAMMERCY','CHILDRENFIC','3');
+Insert into BOOKSHELF values
+ ('GOOD DOG, CARL','LITTLE SIMON','CHILDRENPIC','1');
+Insert into BOOKSHELF values
+ ('LETTERS AND PAPERS FROM PRISON','SCRIBNER','ADULTNF','4');
+Insert into BOOKSHELF values
+ ('THE DISCOVERERS','RANDOM HOUSE','ADULTNF','4');
+Insert into BOOKSHELF values
+ ('THE MISMEASURE OF MAN','W.W. NORTON','ADULTNF','5');
+Insert into BOOKSHELF values
+ ('EITHER/OR','PENGUIN','ADULTREF','3');
+Insert into BOOKSHELF values
+ ('POLAR EXPRESS','HOUGHTON MIFFLIN','CHILDRENPIC','1');
+Insert into BOOKSHELF values
+('RUNAWAY BUNNY','HARPERFESTIVAL','CHILDRENPIC','1');
+Insert into BOOKSHELF values
+('MY LEDGER','KOCH PRESS','ADULTNF','5');
+Insert into BOOKSHELF values
+('COMPLETE POEMS OF JOHN KEATS','VIKING','ADULTREF','2');
+Insert into BOOKSHELF values
+('UNDER THE EYE OF THE CLOCK','ARCADE PUB','CHILDRENNF','3');
+Insert into BOOKSHELF values
+('JOHN ADAMS','SIMON SCHUSTER','ADULTNF','4');
+Insert into BOOKSHELF values
+('TRUMAN','SIMON SCHUSTER','ADULTNF','4');
+Insert into BOOKSHELF values
+('JOURNALS OF LEWIS AND CLARK','MARINER','ADULTNF','4');
+Insert into BOOKSHELF values
+('GOSPEL','PICADOR','ADULTFIC','4');
+Insert into BOOKSHELF values
+('EMMA WHO SAVED MY LIFE','ST MARTIN''S PRESS','ADULTFIC','3');
+Insert into BOOKSHELF values
+('MIDNIGHT MAGIC','SCHOLASTIC','CHILDRENFIC','1');
+Insert into BOOKSHELF values
+('HARRY POTTER AND THE GOBLET OF FIRE','SCHOLASTIC','CHILDRENFIC','4');
+Insert into BOOKSHELF values
+('SHOELESS JOE','MARINER','ADULTFIC','3');
+Insert into BOOKSHELF values
+('BOX SOCIALS','BALLANTINE','ADULTFIC','3');
+Insert into BOOKSHELF values
+('TRUMPET OF THE SWAN','HARPERCOLLINS','CHILDRENFIC','3');
+Insert into BOOKSHELF values
+('CHARLOTTE''S WEB','HARPERTROPHY','CHILDRENFIC','3');
+Insert into BOOKSHELF values
+('WEST WITH THE NIGHT','NORTH POINT PRESS','ADULTNF','3');
+Insert into BOOKSHELF values
+('THE GOOD BOOK','BARD','ADULTREF','4');
+Insert into BOOKSHELF values
+('PREACHING TO HEAD AND HEART','ABINGDON PRESS','ADULTREF','4');
+Insert into BOOKSHELF values
+('THE COST OF DISCIPLESHIP','TOUCHSTONE','ADULTREF','3');
+Insert into BOOKSHELF values
+('THE SHIPPING NEWS','SIMON SCHUSTER','ADULTFIC','4');
+
+commit;
+
+--    The AUTHOR, CATEGORY, and BOOKSHELF tables
+--    must be created before BOOKSHELF_AUTHOR.
+
+-- drop table BOOKSHELF_AUTHOR;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table BOOKSHELF_AUTHOR
+(Title      VARCHAR(100),
+AuthorName  VARCHAR(50),
+constraint TitleFK Foreign key (Title) references BOOKSHELF(Title),
+constraint AuthorNameFK Foreign key (AuthorName)
+references AUTHOR(AuthorName));
+
+Insert into BOOKSHELF_AUTHOR values
+('TO KILL A MOCKINGBIRD','HARPER LEE');
+Insert into BOOKSHELF_AUTHOR values
+ ('WONDERFUL LIFE','STEPHEN JAY GOULD');
+Insert into BOOKSHELF_AUTHOR values
+ ('INNUMERACY','JOHN ALLEN PAULOS');
+Insert into BOOKSHELF_AUTHOR values
+ ('KIERKEGAARD ANTHOLOGY','ROBERT BRETALL');
+Insert into BOOKSHELF_AUTHOR values
+ ('KIERKEGAARD ANTHOLOGY','SOREN KIERKEGAARD');
+Insert into BOOKSHELF_AUTHOR values
+ ('ANNE OF GREEN GABLES','LUCY MAUD MONTGOMERY');
+Insert into BOOKSHELF_AUTHOR values
+ ('GOOD DOG, CARL','ALEXANDRA DAY');
+Insert into BOOKSHELF_AUTHOR values
+ ('LETTERS AND PAPERS FROM PRISON','DIETRICH BONHOEFFER');
+Insert into BOOKSHELF_AUTHOR values
+ ('THE DISCOVERERS','DANIEL BOORSTIN');
+Insert into BOOKSHELF_AUTHOR values
+ ('THE MISMEASURE OF MAN','STEPHEN JAY GOULD');
+Insert into BOOKSHELF_AUTHOR values
+ ('EITHER/OR','SOREN KIERKEGAARD');
+Insert into BOOKSHELF_AUTHOR values
+ ('POLAR EXPRESS','CHRIS VAN ALLSBURG');
+Insert into BOOKSHELF_AUTHOR values
+('RUNAWAY BUNNY','MARGARET WISE BROWN');
+Insert into BOOKSHELF_AUTHOR values
+('RUNAWAY BUNNY','CLEMENT HURD');
+Insert into BOOKSHELF_AUTHOR values
+('MY LEDGER','G. B. TALBOT');
+Insert into BOOKSHELF_AUTHOR values
+('COMPLETE POEMS OF JOHN KEATS','JOHN KEATS');
+Insert into BOOKSHELF_AUTHOR values
+('COMPLETE POEMS OF JOHN KEATS','JOHN BARNARD');
+Insert into BOOKSHELF_AUTHOR values
+('UNDER THE EYE OF THE CLOCK','CHRISTOPHER NOLAN');
+Insert into BOOKSHELF_AUTHOR values
+('JOHN ADAMS','DAVID MCCULLOUGH');
+Insert into BOOKSHELF_AUTHOR values
+('TRUMAN','DAVID MCCULLOUGH');
+Insert into BOOKSHELF_AUTHOR values
+('JOURNALS OF LEWIS AND CLARK','MERIWETHER LEWIS');
+Insert into BOOKSHELF_AUTHOR values
+('JOURNALS OF LEWIS AND CLARK','WILLIAM CLARK');
+Insert into BOOKSHELF_AUTHOR values
+('JOURNALS OF LEWIS AND CLARK','STEPHEN AMBROSE');
+Insert into BOOKSHELF_AUTHOR values
+('JOURNALS OF LEWIS AND CLARK','BERNARD DE VOTO');
+Insert into BOOKSHELF_AUTHOR values
+('GOSPEL','WILTON BARNHARDT');
+Insert into BOOKSHELF_AUTHOR values
+('EMMA WHO SAVED MY LIFE','WILTON BARNHARDT');
+Insert into BOOKSHELF_AUTHOR values
+('MIDNIGHT MAGIC','AVI');
+Insert into BOOKSHELF_AUTHOR values
+('HARRY POTTER AND THE GOBLET OF FIRE','J. K. ROWLING');
+Insert into BOOKSHELF_AUTHOR values
+('SHOELESS JOE','W. P. KINSELLA');
+Insert into BOOKSHELF_AUTHOR values
+('BOX SOCIALS','W. P. KINSELLA');
+Insert into BOOKSHELF_AUTHOR values
+('TRUMPET OF THE SWAN','E. B. WHITE');
+Insert into BOOKSHELF_AUTHOR values
+('CHARLOTTE''S WEB','E. B. WHITE');
+Insert into BOOKSHELF_AUTHOR values
+('WEST WITH THE NIGHT','BERYL MARKHAM');
+Insert into BOOKSHELF_AUTHOR values
+('THE GOOD BOOK','PETER GOMES');
+Insert into BOOKSHELF_AUTHOR values
+('PREACHING TO HEAD AND HEART','THOMAS SWEARS');
+Insert into BOOKSHELF_AUTHOR values
+('THE COST OF DISCIPLESHIP','DIETRICH BONHOEFFER');
+Insert into BOOKSHELF_AUTHOR values
+('THE SHIPPING NEWS','E. ANNIE PROULX');
+
+commit;
+
+
+-- drop table BOOKSHELF_CHECKOUT;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table BOOKSHELF_CHECKOUT
+(Name  VARCHAR(25),
+ Title VARCHAR(100),
+ CheckoutDate  TIMESTAMP(0),
+ ReturnedDate  TIMESTAMP(0));
+
+-- Insert into BOOKSHELF_CHECKOUT values  todo
+-- ('JED HOPKINS','INNUMERACY','01.01.02','22.01.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('GERHARDT KENTGEN','WONDERFUL LIFE','02.01.02','02.02.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('DORAH TALBOT','EITHER/OR','02.01.02','10.01.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('EMILY TALBOT','ANNE OF GREEN GABLES','02.01.02','20.01.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('PAT LAVAY','THE SHIPPING NEWS','02.01.02','12.01.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('ROLAND BRANDT','THE SHIPPING NEWS','12.01.02','12.03.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('ROLAND BRANDT','THE DISCOVERERS','12.01.02','01.03.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('ROLAND BRANDT','WEST WITH THE NIGHT','12.01.02','01.03.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('EMILY TALBOT','MIDNIGHT MAGIC','20.01.02','03.02.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('EMILY TALBOT','HARRY POTTER AND THE GOBLET OF FIRE','03.02.02','14.02.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('PAT LAVAY','THE MISMEASURE OF MAN','12.01.02','12.02.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('DORAH TALBOT','POLAR EXPRESS','01.02.02','15.02.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('DORAH TALBOT','GOOD DOG, CARL','01.02.02','15.02.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('GERHARDT KENTGEN','THE MISMEASURE OF MAN','13.02.02','05.03.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('FRED FULLER','JOHN ADAMS','01.02.02','01.03.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('FRED FULLER','TRUMAN','01.03.02','20.03.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('JED HOPKINS','TO KILL A MOCKINGBIRD','15.02.02','01.03.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('DORAH TALBOT','MY LEDGER','15.02.02','03.03.02');
+-- Insert into BOOKSHELF_CHECKOUT values
+-- ('GERHARDT KENTGEN','MIDNIGHT MAGIC','05.02.02','10.02.02');
+
+commit;
+
+--  Requires that the TOOLS_VA datatype be created first.
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table BORROWER
+(Name          VARCHAR(25),
+ Tools         TOOLS_VA,
+constraint BORROWER_PK primary key (Name));
+
+-- insert into BORROWER values todo
+-- ('JED HOPKINS',
+--   TOOLS_VA('HAMMER','SLEDGE','AX'));
+
+--  Requires that the ANIMAL_TY and ANIMALS_NT types
+--    already exist.
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+-- create table BREEDER ( todo
+-- BreederName      VARCHAR(25),
+-- Animals          ANIMALS_NT)
+-- nested table ANIMALS store as ANIMALS_NT_TAB;
+
+-- drop table BREEDING;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table BREEDING (
+Offspring     VARCHAR(10),
+Sex           CHAR(1),
+Cow           VARCHAR(10),
+Bull          VARCHAR(10),
+Birthdate     TIMESTAMP(0)
+);
+
+-- insert into BREEDING values ('EVE','F',null,null,null);  todo
+-- insert into BREEDING values ('ADAM','M',null,null,null);
+-- insert into BREEDING values ('BANDIT','M',null,null,null);
+-- insert into BREEDING values ('BETSY','F','EVE','ADAM','02.01.1900');
+-- insert into BREEDING values ('POCO','M','EVE','ADAM','15.07.1900');
+-- insert into BREEDING values ('GRETA','F','EVE','BANDIT','12.03.1901');
+-- insert into BREEDING values ('MANDY','F','EVE','POCO','22.08.1902');
+-- insert into BREEDING values ('NOVI','F','BETSY','ADAM','30.03.1903');
+-- insert into BREEDING values ('GINNY','F','BETSY','BANDIT','04.12.1903');
+-- insert into BREEDING values ('CINDY','F','EVE','POCO','09.02.1903');
+-- insert into BREEDING values ('DUKE','M','MANDY','BANDIT','24.07.1904');
+-- insert into BREEDING values ('TEDDI','F','BETSY','BANDIT','12.08.1905');
+-- insert into BREEDING values ('SUZY','F','GINNY','DUKE','03.04.1906');
+-- insert into BREEDING values ('RUTH','F','GINNY','DUKE','25.12.1906');
+-- insert into BREEDING values ('PAULA','F','MANDY','POCO','21.12.1906');
+-- insert into BREEDING values ('DELLA','F','SUZY','BANDIT','11.10.1908');
+
+-- drop table CD;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table CD (
+Account      DOUBLE PRECISION not null,
+Amount       DOUBLE PRECISION not null,
+MaturityDate TIMESTAMP(0) not null
+);
+
+-- insert into CD values (573334, 10000,'15.01.2009'); todo
+-- insert into CD values (677654, 25000,'15.01.2001');
+-- insert into CD values (976032, 10000,'15.01.1995');
+-- insert into CD values (275031, 10000,'15.01.1997');
+-- insert into CD values (274598, 20000,'15.01.1999');
+-- insert into CD values (538365, 45000,'15.01.2001');
+-- insert into CD values (267432, 16500,'15.01.2004');
+
+-- drop table COMFORT;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+-- create table COMFORT (
+-- City          VARCHAR(13) NOT NULL,
+-- SampleDate    TIMESTAMP(0) NOT NULL,
+-- Noon          DECIMAL(3,1),
+-- Midnight      DECIMAL(3,1),
+-- Precipitation DOUBLE PRECISION
+-- );
+
+-- drop table COMFORT;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+-- insert into COMFORT values ('SAN FRANCISCO','21.03.2015',62.5,42.3,.5); todo
+
+create table COMFORT (
+                         City          VARCHAR(13) NOT NULL,
+                         SampleDate    TIMESTAMP(0) NOT NULL,
+                         Noon          DECIMAL(3,1),
+                         Midnight      DECIMAL(3,1),
+                         Precipitation DOUBLE PRECISION
+);
+-- insert into COMFORT values ('SAN FRANCISCO','22.06.2015',51.1,71.9,.1); todo
+-- insert into COMFORT values ('SAN FRANCISCO','23.09.2015',NULL,61.5,.1);
+-- insert into COMFORT values ('SAN FRANCISCO','22.12.2015',52.6,39.8,2.3);
+-- insert into COMFORT values ('KEENE','21.03.2015',39.9,-1.2,4.4);
+-- insert into COMFORT values ('KEENE','22.06.2015',85.1,66.7,1.3);
+-- insert into COMFORT values ('KEENE','23.09.2015',99.8,82.6,NULL);
+-- insert into COMFORT values ('KEENE','22.12.2015',-7.2,-1.2,3.9);
+
+-- drop table COMFORT2;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table COMFORT2 (
+City          VARCHAR(13) NOT NULL,
+SampleDate    TIMESTAMP(0) NOT NULL,
+Noon          DECIMAL(3,1),
+Midnight      DECIMAL(3,1),
+Precipitation DOUBLE PRECISION
+);
+
+
+-- drop table COMFORT_TEST;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table COMFORT_TEST (
+City          VARCHAR(13) NOT NULL,
+SampleDate    TIMESTAMP(0) NOT NULL,
+Measure       VARCHAR(10),
+Value         DECIMAL(3,1)
+);
+
+-- drop table CONTINENT;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table CONTINENT (
+ Continent    VARCHAR(30));
+
+
+-- drop table COUNTRY;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table COUNTRY (
+Country      VARCHAR(30) not null,
+Continent    VARCHAR(30));
+
+
+--  Requires that the ADDRESS_TY and PERSON_TY types already
+--  exist.
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table CUSTOMER (
+Customer_ID    DOUBLE PRECISION,
+Person         PERSON_TY
+);
+
+-- insert into CUSTOMER VALUES todo
+-- (1,
+--  PERSON_TY('NEIL MULLANE',
+--             ADDRESS_TY('57 MT PLEASANT ST',
+--                        'FINN', 'NH', 11111)));
+-- insert into CUSTOMER VALUES
+-- (2,
+--  PERSON_TY('SEYMOUR HESTER',
+--             ADDRESS_TY('1 STEPAHEAD RD',
+--                        'BRIANT', 'NH', 11111)));
+
+-- drop table EMPTY;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table EMPTY (
+Nothing       VARCHAR(25),
+Less          DOUBLE PRECISION
+);
+
+-- No inserts. This table is empty.
+
+-- drop table HOLIDAY;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table HOLIDAY (
+Holiday        VARCHAR(25),
+ActualDate     TIMESTAMP(0),
+CelebratedDate TIMESTAMP(0)
+);
+
+-- insert into HOLIDAY values ('NEW YEARS DAY', todo
+--    '01.01.2004',
+--    '01.01.2004');
+-- insert into HOLIDAY values ('MARTIN LUTHER KING, JR.',
+--    '15.01.2004',
+--    '19.01.2004');
+-- insert into HOLIDAY values ('LINCOLNS BIRTHDAY',
+--    '12.02.2004',
+--    '16.02.2004');
+-- insert into HOLIDAY values ('WASHINGTONS BIRTHDAY',
+--    '22.02.2004',
+--    '16.02.2004');
+-- insert into HOLIDAY values ('FAST DAY, NEW HAMPSHIRE',
+--    '22.02.2004',
+--    '22.02.2004');
+-- insert into HOLIDAY values ('MEMORIAL DAY',
+--    '30.05.2004',
+--    '31.05.2004');
+-- insert into HOLIDAY values ('INDEPENDENCE DAY',
+--    '04.07.2004',
+--    '04.07.2004');
+-- insert into HOLIDAY values ('LABOR DAY',
+--    '06.09.2004',
+--    '06.09.2004');
+-- insert into HOLIDAY values ('COLUMBUS DAY',
+--    '12.10.2004',
+--    '11.10.2004');
+-- insert into HOLIDAY values ('THANKSGIVING',
+--    '25.11.2004',
+--    '25.11.2004');
+
+-- drop table LOCATION;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table LOCATION (
+City       VARCHAR(25),
+Country    VARCHAR(25),
+Continent  VARCHAR(25),
+Latitude   DOUBLE PRECISION,
+NorthSouth CHAR(1),
+Longitude  DOUBLE PRECISION,
+EastWest   CHAR(1)
+);
+
+insert into LOCATION values (
+  'ATHENS','GREECE','EUROPE',37.58,'N',23.43,'E');
+insert into LOCATION values (
+  'CHICAGO','UNITED STATES','NORTH AMERICA',41.53,'N',87.38,'W');
+insert into LOCATION values (
+  'CONAKRY','GUINEA','AFRICA',9.31,'N',13.43,'W');
+insert into LOCATION values (
+  'LIMA','PERU','SOUTH AMERICA',12.03,'S',77.03,'W');
+insert into LOCATION values (
+  'MADRAS','INDIA','INDIA',13.05,'N',80.17,'E');
+insert into LOCATION values (
+  'MANCHESTER','ENGLAND','EUROPE',53.30,'N',2.15,'W');
+insert into LOCATION values (
+  'MOSCOW','RUSSIA','EUROPE',55.45,'N',37.35,'E');
+insert into LOCATION values (
+  'PARIS','FRANCE','EUROPE',48.52,'N',2.20,'E');
+insert into LOCATION values (
+  'SHENYANG','CHINA','CHINA',41.48,'N',123.27,'E');
+insert into LOCATION values (
+  'ROME','ITALY','EUROPE',41.54,'N',12.29,'E');
+insert into LOCATION values (
+  'TOKYO','JAPAN','ASIA',35.42,'N',139.46,'E');
+insert into LOCATION values (
+  'SYDNEY','AUSTRALIA','AUSTRALIA',33.52,'S',151.13,'E');
+insert into LOCATION values (
+  'SPARTA','GREECE','EUROPE',37.05,'N',22.27,'E');
+insert into LOCATION values (
+  'MADRID','SPAIN','EUROPE',40.24,'N',3.41,'W');
+
+-- drop table magazine;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table magazine (
+Name       VARCHAR(16),
+Title      VARCHAR(37),
+Author     VARCHAR(25),
+IssueDate  TIMESTAMP(0),
+Page       DOUBLE PRECISION
+);
+
+-- insert into MAGAZINE values (
+--   'BERTRAND MONTHLY','THE BARBERS WHO SHAVE THEMSELVES.',
+--   'BONHOEFFER, DIETRICH',
+--   TO_DATE('23.05.1988'),70);
+-- insert into MAGAZINE values (
+--   'LIVE FREE OR DIE','"HUNTING THOREAU IN NEW HAMPSHIRE"',
+--   'CHESTERTON, G.K.',
+--   TO_DATE('26.08.1981'),320);
+-- insert into MAGAZINE values (
+--   'PSYCHOLOGICA','THE ETHNIC NEIGHBORHOOD',
+--   'RUTH, GEORGE HERMAN',
+--   TO_DATE('18.09.1919'),246);
+-- insert into MAGAZINE values (
+--   'FADED ISSUES','RELATIONAL DESIGN AND ENTHALPY',
+--   'WHITEHEAD, ALFRED',
+--   TO_DATE('20.06.1926'),279);
+-- insert into MAGAZINE values (
+--   'ENTROPY WIT','"INTERCONTINENTAL RELATIONS."',
+--   'CROOKES, WILLIAM',
+--   TO_DATE('20.09.1950'),20);
+
+-- drop table MATH;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table MATH (
+Name          VARCHAR(12),
+Above         DOUBLE PRECISION,
+Below         DOUBLE PRECISION,
+Empty         DOUBLE PRECISION
+);
+
+insert into MATH values ('WHOLE NUMBER',11,-22,null);
+insert into MATH values ('LOW DECIMAL',33.33,-44.44,null);
+insert into MATH values ('MID DECIMAL',55.5,-55.5,null);
+insert into MATH values ('HIGH DECIMAL',66.666,-77.777,null);
+
+-- drop table NAME;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table NAME (
+Name         VARCHAR(25)
+);
+
+insert into NAME values ('HORATIO NELSON');
+insert into NAME values ('VALDO');
+insert into NAME values ('MARIE DE MEDICIS');
+insert into NAME values ('FLAVIUS JOSEPHUS');
+insert into NAME values ('EDYTHE P. M. GAMMIERE');
+
+-- drop table NEWSPAPER;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table NEWSPAPER (
+Feature      VARCHAR(15) not null,
+Section      CHAR(1),
+Page         DOUBLE PRECISION
+);
+
+insert into NEWSPAPER values ('National News', 'A', 1);
+insert into NEWSPAPER values ('Sports', 'D', 1);
+insert into NEWSPAPER values ('Editorials', 'A', 12);
+insert into NEWSPAPER values ('Business', 'E', 1);
+insert into NEWSPAPER values ('Weather', 'C', 2);
+insert into NEWSPAPER values ('Television', 'B', 7);
+insert into NEWSPAPER values ('Births', 'F', 7);
+insert into NEWSPAPER values ('Classified', 'F', 8);
+insert into NEWSPAPER values ('Modern Life', 'B', 1);
+insert into NEWSPAPER values ('Comics', 'C', 4);
+insert into NEWSPAPER values ('Movies', 'B', 4);
+insert into NEWSPAPER values ('Bridge', 'B', 2);
+insert into NEWSPAPER values ('Obituaries', 'F', 6);
+insert into NEWSPAPER values ('Doctor Is In', 'F', 6);
+
+-- drop table NUMBERTEST;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table NUMBERTEST (
+Value1        DOUBLE PRECISION,
+Value2        DOUBLE PRECISION,
+Value3        DECIMAL(10,2)
+);
+
+insert into NUMBERTEST values (0,0,0);
+insert into NUMBERTEST values (.0001,.0001,.0001);
+insert into NUMBERTEST values (1234,1234,1234);
+insert into NUMBERTEST values (1234.5,1234.5,1234.5);
+insert into NUMBERTEST values (null,null,null);
+insert into NUMBERTEST values (1234.56,1234.56,1234.56);
+insert into NUMBERTEST values (1234.567,1234.567,1234.567);
+insert into NUMBERTEST values
+     (98761234.567,98761234.567,98761234.567);
+
+-- drop table PAYDAY;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table PAYDAY (
+CycleDate      TIMESTAMP(0)
+);
+
+-- insert into PAYDAY values ('15.01.2017');
+-- insert into PAYDAY values ('15.02.2017');
+-- insert into PAYDAY values ('15.03.2017');
+-- insert into PAYDAY values ('15.04.2017');
+-- insert into PAYDAY values ('15.05.2017');
+-- insert into PAYDAY values ('15.06.2017');
+-- insert into PAYDAY values ('15.07.2017');
+-- insert into PAYDAY values ('15.08.2017');
+-- insert into PAYDAY values ('15.09.2017');
+-- insert into PAYDAY values ('15.10.2017');
+-- insert into PAYDAY values ('15.11.2017');
+-- insert into PAYDAY values ('15.12.2017');
+
+-- drop table PROPOSAL;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table PROPOSAL
+(Proposal_ID        BIGINT primary key,
+ Recipient_Name     VARCHAR(25),
+ Proposal_Name      VARCHAR(25),
+ Short_Description  VARCHAR(1000),
+ Proposal_Text      TEXT,
+ Budget             BYTEA,
+ Cover_Letter       VARCHAR(255));
+
+-- drop table RADIUS_VALS;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table RADIUS_VALS
+(Radius      INT);
+
+insert into RADIUS_VALS values (3);
+
+
+-- drop table RATING;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table RATING
+(Rating  VARCHAR(2),
+RatingDescription VARCHAR(50));
+
+Insert into RATING values ('1','ENTERTAINMENT');
+Insert into RATING values ('2','BACKGROUND INFORMATION');
+Insert into RATING values ('3','RECOMMENDED');
+Insert into RATING values ('4','STRONGLY RECOMMENDED');
+Insert into RATING values ('5','REQUIRED READING');
+commit;
+
+
+-- drop table ROSE;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table ROSE (
+Lodging       VARCHAR(12)
+);
+
+insert into ROSE values ('ROSELYN');
+insert into ROSE values ('ROSE HILL');
+insert into ROSE values ('ROSE GARDEN');
+insert into ROSE values ('ROSE');
+
+-- drop table SHIPPING;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table SHIPPING (
+Client        VARCHAR(13),
+Weight        DOUBLE PRECISION
+);
+
+insert into SHIPPING values ('JOHNSON TOOL',59);
+insert into SHIPPING values ('DAGG SOFTWARE',27);
+insert into SHIPPING values ('TULLY ANDOVER',NULL);
+
+-- drop table STOCK;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table STOCK (
+Company      VARCHAR(20),
+Symbol       VARCHAR(6),
+Industry     VARCHAR(15),
+CloseYesterday DECIMAL(6,2),
+CloseToday     DECIMAL(6,2),
+Volume         DOUBLE PRECISION
+);
+
+insert into STOCK values (
+  'AD SPECIALTY', 'ADSP', 'ADVERTISING',  31.75, 31.75,
+   18333876);
+insert into STOCK values (
+  'APPLE CANNERY', 'APCN', 'AGRICULTURE',  33.75, 36.50,
+   25787229);
+insert into STOCK values (
+  'AT SPACE', 'ATR' , 'MEDICAL', 46.75, 48.00,
+   11398323);
+insert into STOCK values (
+  'AUGUST ENTERPRISES', 'AGE', 'MEDICAL', 15.00, 15.00,
+   12221711);
+insert into STOCK values (
+  'BRANDON ELLIPSIS', 'BELP', 'SPACE', 32.75, 33.50,
+  25789769);
+insert into STOCK values (
+  'GENERAL ENTROPY','GENT', 'SPACE', 64.25, 66.00,
+   7598562);
+insert into STOCK values (
+  'GENEVA ROCKETRY', 'GENR', 'SPACE', 22.75, 27.25,
+   22533944);
+insert into STOCK values (
+  'HAYWARD ANTISEPTIC',  'HAYW', 'MEDICAL', 104.25,  106.00,
+   3358561);
+insert into STOCK values (
+  'IDK', 'IDK', 'ELECTRONICS',  95.00, 95.25,
+   9443523);
+insert into STOCK values (
+  'INDIA COSMETICS','INDI', 'COSMETICS', 30.75, 30.75,
+   8134878);
+insert into STOCK values (
+  'ISAIAH JAMES STORAGE', 'IJS', 'TRANSPORTATION', 13.25, 13.75,
+   22112171);
+insert into STOCK values (
+  'KDK AIRLINES',  'KDK', 'TRANSPORTATION', 85.00, 85.25,
+   7481566);
+insert into STOCK values (
+  'KENTGEN BIOPHYSICS',  'KENT', 'MEDICAL', 18.25, 19.50,
+   6636863);
+insert into STOCK values (
+  'LAVAY COSMETICS', 'LAVA', 'COSMETICS', 21.50, 22.00,
+   3341542);
+insert into STOCK values (
+  'LOCAL DEVELOPMENT',  'LOCD', 'AGRICULTURE',  26.75, 27.25,
+   2596934);
+insert into STOCK values (
+  'MAXTIDE'  , 'MAXT', 'TRANSPORTATION', 8.25, 8.00,
+   2836893);
+insert into STOCK values (
+  'MBK COMMUNICATIONS', 'MBK', 'ADVERTISING',  43.25, 41.00,
+   10022980);
+insert into STOCK values (
+  'MEMORY GRAPHICS', 'MEMG', 'ELECTRONICS',  15.50, 14.25,
+   4557992);
+insert into STOCK values (
+'MICRO TOKEN', 'MICT', 'ELECTRONICS',  77.00, 76.50,
+   25205667);
+insert into STOCK values (
+  'NANCY LEE FEATURES', 'NLF', 'ADVERTISING',  13.50, 14.25,
+   14222692);
+insert into STOCK values (
+  'NORTHERN BOREAL', 'NBOR', 'SPACE', 26.75, 28.00,
+   1348323);
+insert into STOCK values (
+  'OCKHAM SYSTEMS', 'OCKS', 'SPACE', 21.50, 22.00,
+   7052990);
+insert into STOCK values (
+  'OSCAR COAL DRAYAGE', 'OCD', 'TRANSPORTATION', 87.00, 88.50,
+   25798992);
+insert into STOCK values (
+  'ROBERT JAMES APPAREL', 'RJAP', 'GARMENT', 23.25, 24.00,
+   19032481);
+insert into STOCK values (
+  'SOUP SENSATIONS','SOUP', 'AGRICULTURE',  16.25, 16.75,
+   22574879);
+insert into STOCK values (
+  'WONDER LABS', 'WOND', 'SPACE', 5.00, 5.00,
+   2553712);
+
+-- drop table STOCK_ACCOUNT;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table STOCK_ACCOUNT
+(Account  BIGINT,
+AccountLongName  VARCHAR(50));
+
+insert into STOCK_ACCOUNT values (
+1234, 'ADAMS');
+insert into STOCK_ACCOUNT values (
+7777, 'BURLINGTON');
+commit;
+
+
+-- drop table STOCK_TRX;
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table STOCK_TRX (
+Account  BIGINT,
+Symbol  VARCHAR(20),
+Price  DECIMAL(6,2),
+Quantity  INT,
+Trx_Flag  VARCHAR(1));
+
+insert into STOCK_TRX values (
+  1234, 'ADSP', 31.75, 100, 'B');
+insert into STOCK_TRX values (
+  7777, 'ADSP', 31.50, 300, 'S');
+insert into STOCK_TRX values (
+  1234, 'ADSP', 31.55, 100, 'B');
+insert into STOCK_TRX values (
+  7777, 'OCKS', 21.75, 1000, 'B');
+commit;
+
+
+-- drop table TROUBLE;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table TROUBLE (
+City          VARCHAR(13) NOT NULL,
+SampleDate    TIMESTAMP(0) NOT NULL,
+Noon          DECIMAL(3,1),
+Midnight      DECIMAL(3,1),
+Precipitation DOUBLE PRECISION
+);
+
+-- insert into TROUBLE values ('PLEASANT LAKE',
+--   '21.03.01', 39.99, -1.31, 3.6);
+-- insert into TROUBLE values ('PLEASANT LAKE',
+--   '22.06.01', 101.44, 86.2, 1.63);
+-- insert into TROUBLE values ('PLEASANT LAKE',
+--   '23.09.01', 92.85, 79.6, 1.00003);
+-- insert into TROUBLE values ('PLEASANT LAKE',
+--   '22.12.01', -17.445, -10.4, 2.4);
+
+-- drop table TWONAME;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table TWONAME (
+FirstName    VARCHAR(25),
+LastName     VARCHAR(25)
+);
+
+-- drop table WEATHER;
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+create table WEATHER (
+City         VARCHAR(11),
+Temperature  DOUBLE PRECISION,
+Humidity     DOUBLE PRECISION,
+Condition    VARCHAR(9)
+);
+
+insert into WEATHER values ('LIMA',45,79,'RAIN');
+insert into WEATHER values ('PARIS',81,62,'CLOUDY');
+insert into WEATHER values ('MANCHESTER',66,98,'FOG');
+insert into WEATHER values ('ATHENS',97,89,'SUNNY');
+insert into WEATHER values ('CHICAGO',66,88,'RAIN');
+insert into WEATHER values ('SYDNEY',69,99,'SUNNY');
+insert into WEATHER values ('SPARTA',74,63,'CLOUDY');
+commit;
+
+
+
